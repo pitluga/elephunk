@@ -1,3 +1,3 @@
 $(function(){
-  $(".easydate").easydate({});
+  $(".easydate").easydate({live: false});
 });

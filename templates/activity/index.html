@@ -21,7 +21,7 @@
           <td>{{ connection.datname }}</td>
           <td>{{ connection.usename }}</td>
           <td>{{ connection.client_addr }}</td>
-          <td>{{ connection.xact_start }}</td>
+          <td><abbr title="{{ connection.xact_start.isoformat() }}" class="easydate"></abbr></td>
           <td>{{ connection.current_query }}</td>
         </tr>
       {% end %}
