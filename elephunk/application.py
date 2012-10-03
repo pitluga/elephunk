@@ -6,12 +6,12 @@ import elephunk.activity
 import elephunk.databases
 import elephunk.database
 
-def create():
+def create(debug=False):
     handlers = elephunk.handlers()
     handlers += elephunk.activity.handlers()
     handlers += elephunk.databases.handlers()
 
-    application = tornado.web.Application(handlers, debug=True, template_path="templates", static_path="static")
+    application = tornado.web.Application(handlers, debug=debug, template_path="templates", static_path="static")
     application.db = elephunk.database.Database(momoko.AsyncClient({
         'host': 'localhost',
         'port': 5432,
