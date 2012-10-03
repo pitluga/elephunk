@@ -1,0 +1,42 @@
+{% extends "../layouts/main.html" %}
+
+{% block nav %}
+  {% set active_tab = 'databases' %}
+{% end %}
+
+{% block content %}
+  <table class="table table-sorted">
+    <thead>
+      <tr>
+        <th>Database</th>
+        <th>Connections</th>
+        <th>Transactions</th>
+        <th>Disk Cache Ratio</th>
+        <th>Tuples Scanned</th>
+        <th>Tuples Inserted</th>
+        <th>Tuples Updated</th>
+        <th>Tuples Deleted</th>
+        <th>Stats Age</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for database in databases %}
+        <tr>
+          <td>{{ database.datname }}</td>
+          <td>{{ database.numbackends }}</td>
+          <td>{{ database.xact_commit }} <small>comitted</small><br/>
+            {{ database.xact_rollback }} <small>rolled back</small></td>
+          <td>{{ percent(database.blks_hit, (database.blks_read + database.blks_hit)) }}<br/>
+            <small> {{ database.blks_hit }} / {{ database.blks_read }} </small></td>
+          <td>{{ database.tup_returned }} <small>table</small><br/>
+            {{ database.tup_fetched }} <small>index</small></td>
+          <td>{{ database.tup_inserted }}</td>
+          <td>{{ database.tup_updated }}</td>
+          <td>{{ database.tup_deleted }}</td>
+          <td><abbr title="{{ database.stats_reset.isoformat() }}" class="easydate"></abbr></td>
+        </tr>
+      {% end %}
+    </tbody>
+  </table>
+{% end %}
+

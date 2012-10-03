@@ -34,6 +34,7 @@
             <ul class="nav">
               <li class="{{ "active" if active_tab == "home" else ""}}"><a href="/">Home</a></li>
               <li class="{{ "active" if active_tab == "activity" else ""}}"><a href="/activity">Activity</a></li>
+              <li class="{{ "active" if active_tab == "databases" else ""}}"><a href="/databases">Databases</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -51,5 +52,9 @@
 
     <script src="/static/js/v/jquery.min.js"></script>
     <script src="/static/js/v/bootstrap.min.js"></script>
+    <script src="/static/js/v/jquery.easydate.min.js"></script>
+    <script src="/static/js/application.js"></script>
+    {% block javascripts %}
+    {% end %}
   </body>
 </html>
