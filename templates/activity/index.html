@@ -4,11 +4,32 @@
   {% set active_tab = 'activity' %}
 {% end %}
 
-
-{% block content %}
-  This is activity
-  {% for connection in presenter.connections() %}
-    {{ connection.current_query }} <br/>
-  {% end %}
+{% block javascripts %}
+  <script src="/static/js/v/jquery.tablesorter.min.js"></script>
+  <script src="/static/js/sortedTable.js"></script>
 {% end %}
 
+{% block content %}
+  <table class="table table-sorted">
+    <thead>
+      <tr>
+        <th>Database</th>
+        <th>User</th>
+        <th>Client Host</th>
+        <th>Transaction Start</th>
+        <th>Current Query</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for connection in presenter.active_connections() %}
+        <tr>
+          <td>{{ connection.datname }}</td>
+          <td>{{ connection.usename }}</td>
+          <td>{{ connection.client_addr }}</td>
+          <td>{{ connection.xact_start }}</td>
+          <td>{{ connection.current_query }}</td>
+        </tr>
+      {% end %}
+    </tbody>
+  </table>
+{% end %}
