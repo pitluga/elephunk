@@ -1,5 +1,5 @@
 import unittest
-from elephunk.databases.helpers import *
+from elephunk.stats.helpers import *
 
 class HelpersTest(unittest.TestCase):
     def test_percent(self):
