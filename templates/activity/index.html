@@ -1,0 +1,14 @@
+{% extends "../layouts/main.html" %}
+
+{% block nav %}
+  {% set active_tab = 'activity' %}
+{% end %}
+
+
+{% block content %}
+  This is activity
+  {% for connection in presenter.connections() %}
+    {{ connection.current_query }} <br/>
+  {% end %}
+{% end %}
+

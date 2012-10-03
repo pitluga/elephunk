@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Elephunk</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/static/img/favicon.png" rel="icon" type="image/x-icon">
+    <link href="/static/css/v/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/v/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="/static/css/main.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    {% block nav %}
+      {% set active_tab = 'home' %}
+    {% end %}
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/">Elephunk</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="{{ "active" if active_tab == "home" else ""}}"><a href="/">Home</a></li>
+              <li class="{{ "active" if active_tab == "activity" else ""}}"><a href="/activity">Activity</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      {% block content %}
+        <h1>Bootstrap starter template</h1>
+        <p>Use this document as a way to quick start any new project.<br> All you get is this message and a barebones HTML document.</p>
+      {% end %}
+
+    </div> <!-- /container -->
+
+    <script src="/static/js/v/jquery.min.js"></script>
+    <script src="/static/js/v/bootstrap.min.js"></script>
+  </body>
+</html>
