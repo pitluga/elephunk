@@ -1,3 +1,12 @@
 body {
   padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
 }
+.navbar .brand {
+  padding: 10px 20px 10px 67px;
+}
+
+.brand {
+  background: url(/static/img/postgres.png) no-repeat left center;
+  height: 20px;
+  width: 100px;
+}
