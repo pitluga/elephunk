@@ -14,7 +14,7 @@ parser.add_option('-d', '--debug', action='store_true', default=False)
 
 (options, _) = parser.parse_args()
 
-application = elephunk.application.create(debug=options.debug)
+application = elephunk.application.create(port=options.port, debug=options.debug, config_file=options.config)
 logging.basicConfig(stream=sys.stderr, level=logging.INFO)
 
 def handle_interrupt(signal, frame):
@@ -24,7 +24,6 @@ def handle_interrupt(signal, frame):
 
 signal.signal(signal.SIGINT, handle_interrupt)
 
-application.listen(options.port)
 logging.info("Starting application on port %s" % options.port)
 if options.debug:
     logging.info("* debug mode, files will reload as they are changed")

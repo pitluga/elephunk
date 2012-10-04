@@ -1,21 +1,21 @@
+import yaml
 import tornado.web
-import momoko
 
 import elephunk
 import elephunk.activity
 import elephunk.stats
 import elephunk.database
 
-def create(debug=False):
+def create(port, debug, config_file):
+    with open(config_file, 'r') as f:
+        config = yaml.load(f.read())
+
     handlers = elephunk.handlers()
     handlers += elephunk.activity.handlers()
     handlers += elephunk.stats.handlers()
 
     application = tornado.web.Application(handlers, debug=debug, template_path="templates", static_path="static")
-    application.db = elephunk.database.Database(momoko.AsyncClient({
-        'host': 'localhost',
-        'port': 5432,
-        'database': 'postgres',
-    }))
+    application.db = elephunk.database.DatabaseClients(config['servers'])
+    application.listen(port)
 
     return application

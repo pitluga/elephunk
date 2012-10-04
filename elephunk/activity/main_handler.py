@@ -6,5 +6,5 @@ class MainHandler(tornado.web.RequestHandler):
     @tornado.web.asynchronous
     @gen.engine
     def get(self):
-        rows = yield gen.Task(self.application.db.select_all, "SELECT * FROM pg_stat_activity")
+        rows = yield gen.Task(self.application.db.client('localhost','postgres').select_all, "SELECT * FROM pg_stat_activity")
         self.render("activity/index.html", presenter=ActivityPresenter(rows))

@@ -1,0 +1,2 @@
+servers:
+  localhost: "psql://localhost:5432"
