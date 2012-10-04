@@ -1,6 +1,6 @@
 from tornado import gen
 from tornado.web import asynchronous
-from elephunk.base_handler import BaseHandler
+from base_handler import BaseHandler
 from elephunk.stats.helpers import percent
 
 class DatabasesHandler(BaseHandler):

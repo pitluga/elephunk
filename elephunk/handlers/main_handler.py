@@ -1,6 +1,6 @@
 from tornado import gen
 from tornado.web import asynchronous
-from elephunk.base_handler import BaseHandler
+from base_handler import BaseHandler
 from elephunk.activity.activity_presenter import ActivityPresenter
 
 class MainHandler(BaseHandler):
