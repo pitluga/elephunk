@@ -9,12 +9,12 @@ class Database():
     def __init__(self, client):
         self.client = client
 
-    def select_all(self, operation, parameters=(), callback=None):
-        self.client.execute(operation, parameters, callback = lambda cursor: callback(self._map_cursor(cursor)))
+    def select_all(self, operation, parameters=(), record=Row, callback=None):
+        self.client.execute(operation, parameters, callback = lambda cursor: callback(self._map_cursor(cursor, record)))
 
-    def _map_cursor(self, cursor):
+    def _map_cursor(self, cursor, record):
         names = [x[0] for x in cursor.description]
-        return [Row(**dict(zip(names, row))) for row in cursor.fetchall()]
+        return [record(**dict(zip(names, row))) for row in cursor.fetchall()]
 
 class DatabaseClients:
     def __init__(self, servers, client_factory=AsyncClient):
