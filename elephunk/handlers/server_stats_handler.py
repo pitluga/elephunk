@@ -2,7 +2,7 @@ from tornado import gen
 from tornado.web import asynchronous
 from base_handler import BaseHandler
 
-class DatabasesHandler(BaseHandler):
+class ServerStatsHandler(BaseHandler):
     @asynchronous
     @gen.engine
     def get(self):
