@@ -1,4 +1,4 @@
-from tests.elephunk.http_test_case import HTTPTestCase
+from http_test_case import HTTPTestCase
 from pyquery import PyQuery
 
 class ServerSelectionTest(HTTPTestCase):
