@@ -29,3 +29,6 @@ class DatabaseClientsTest(unittest.TestCase):
         first = database_clients.client('localhost', 'postgres')
         self.assertIs(first, database_clients.client('localhost', 'postgres'))
 
+    def test_server_names_returns_all_the_names_sorted(self):
+        database_clients = DatabaseClients({'somehost': 'psql://somehost', 'localhost': 'psql://localhost'})
+        self.assertEquals(['localhost', 'somehost'], database_clients.server_names())

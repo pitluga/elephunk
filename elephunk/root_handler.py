@@ -1,5 +1,5 @@
-import tornado.web
+from elephunk.base_handler import BaseHandler
 
-class RootHandler(tornado.web.RequestHandler):
+class RootHandler(BaseHandler):
     def get(self):
         self.render("index.html")

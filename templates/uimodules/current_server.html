@@ -1,0 +1,16 @@
+<ul class="nav pull-right">
+  <li class="dropdown">
+    <a id="selected-server" href="#" class="dropdown-toggle" data-toggle="dropdown">{{ selected_server }}<b class="caret"></b></a>
+    <ul class="dropdown-menu">
+      {% for server in servers %}
+        <li>
+          <form action="/select-server" method="POST">
+            <input type="hidden" name="server" value="{{ server }}" />
+            <input type="submit" class="btn btn-link" value="{{ server }}" />
+          </form>
+        </li>
+      {% end %}
+    </ul>
+  </li>
+</ul>
+

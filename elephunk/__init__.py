@@ -1,4 +1,6 @@
-import root_handler
+from root_handler import RootHandler
+from select_server_handler import SelectServerHandler
 
 def handlers():
-    return [(r"/", root_handler.RootHandler)]
+    return [(r"/", RootHandler),
+            (r"/select-server", SelectServerHandler)]

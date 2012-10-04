@@ -33,6 +33,9 @@ class DatabaseClients:
         for client in self._clients.itervalues():
             client.close()
 
+    def server_names(self):
+        return sorted(self._servers.keys())
+
     def _build_client(self, server_name, database_name):
         config = {}
         parsed_url = urlparse(self._servers[server_name])

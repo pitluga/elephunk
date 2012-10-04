@@ -5,6 +5,7 @@ import elephunk
 import elephunk.activity
 import elephunk.stats
 import elephunk.database
+import elephunk.uimodules
 
 def create(port, debug, config_file):
     with open(config_file, 'r') as f:
@@ -14,7 +15,13 @@ def create(port, debug, config_file):
     handlers += elephunk.activity.handlers()
     handlers += elephunk.stats.handlers()
 
-    application = tornado.web.Application(handlers, debug=debug, template_path="templates", static_path="static")
+    application = tornado.web.Application(
+        handlers,
+        debug=debug,
+        template_path="templates",
+        static_path="static",
+        ui_modules=elephunk.uimodules
+    )
     application.db = elephunk.database.DatabaseClients(config['servers'])
     application.listen(port)
 
