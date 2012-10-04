@@ -3,8 +3,8 @@ import tornado.web
 
 import elephunk.handlers
 import elephunk.database
-import elephunk.uimodules
 import elephunk.ui_methods
+import elephunk.ui_modules
 
 def create(port, debug, config_file):
     with open(config_file, 'r') as f:
@@ -15,7 +15,7 @@ def create(port, debug, config_file):
         debug=debug,
         template_path="templates",
         static_path="static",
-        ui_modules=elephunk.uimodules,
+        ui_modules=elephunk.ui_modules,
         ui_methods=elephunk.ui_methods
     )
     application.db = elephunk.database.DatabaseClients(config['servers'])
