@@ -1,0 +1,38 @@
+{% extends "../layouts/main.html" %}
+
+{% block nav %}
+  {% set active_tab = 'indexes' %}
+{% end %}
+
+{% block content %}
+  <ul class="breadcrumb">
+    <li><a href="/indexes">Server</a><span class="divider">/</span></li>
+    <li><a href="/indexes/{{ datid }}">{{ database_name}}</a><span class="divider">/</span></li>
+    <li class="active">{{ table.schemaname }}.{{ table.relname }}</li>
+  </ul>
+
+  <table class="table table-sorted">
+    <thead>
+      <tr>
+        <th>Index</th>
+        <th>Unique</th>
+        <th># of Scans</th>
+        <th>Rows Read</th>
+        <th>Rows Fetched</th>
+        <th>Size</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for index in indexes %}
+        <tr>
+          <td>{{ index.indexrelname }}</td>
+          <td>{{ index.indisunique }}</td>
+          <td>{{ index.idx_scan }}</td>
+          <td>{{ index.idx_tup_read }}</td>
+          <td>{{ index.idx_tup_fetch }}</td>
+          <td>{{ index.idx_size }}</td>
+        </tr>
+      {% end %}
+    </tbody>
+  </table>
+{% end %}

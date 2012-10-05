@@ -12,8 +12,16 @@ class Database():
     def select_all(self, operation, parameters=(), record=Row, callback=None):
         self.client.execute(operation, parameters, callback = lambda cursor: callback(self._map_cursor(cursor, record)))
 
+    def select_one(self, operation, parameters=(), record=Row, callback=None):
+        self.client.execute(operation, parameters, callback = lambda cursor: callback(self._first_entry(cursor, record)))
+
     def select_scalar(self, operation, parameters=(), callback=None):
         self.client.execute(operation, parameters, callback = lambda cursor: callback(self._single_entry(cursor)))
+
+    def _first_entry(self, cursor, record):
+        if cursor.rowcount == 0:
+            return None
+        return self._map_cursor(cursor, record)[0]
 
     def _map_cursor(self, cursor, record):
         names = [x[0] for x in cursor.description]

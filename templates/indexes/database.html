@@ -24,7 +24,7 @@
     <tbody>
       {% for table in tables %}
         <tr>
-          <td>{{ table.schemaname }}.{{ table.relname }}</td>
+          <td><a href="/indexes/{{ datid }}/{{ table.relid }}">{{ table.schemaname }}.{{ table.relname }}</a></td>
           <td>{{ percent(table.idx_tup_fetch, (table.idx_tup_fetch + table.seq_tup_read)) }}</td>
           <td>{{ table.seq_scan }}</td>
           <td>{{ table.seq_tup_read }}</td>
