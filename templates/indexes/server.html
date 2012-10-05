@@ -22,7 +22,7 @@
     <tbody>
       {% for database in databases %}
         <tr>
-          <td>{{ database.datname }}</td>
+          <td><a href="/indexes/{{ database.datid }}">{{ database.datname }}</a></td>
           <td>{{ percent(database.tup_fetched, (database.tup_fetched + database.tup_returned)) }}</td>
           <td>{{ database.tup_returned }}</td>
           <td>{{ database.tup_fetched }}</td>

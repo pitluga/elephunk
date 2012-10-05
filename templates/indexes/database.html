@@ -1,0 +1,38 @@
+{% extends "../layouts/main.html" %}
+
+{% block nav %}
+  {% set active_tab = 'indexes' %}
+{% end %}
+
+{% block content %}
+  <ul class="breadcrumb">
+    <li><a href="/indexes">Server</a><span class="divider">/</span></li>
+    <li class="active">{{ database_name }}</li>
+  </ul>
+
+  <table class="table table-sorted">
+    <thead>
+      <tr>
+        <th>Table</th>
+        <th>Index Hit Ratio</th>
+        <th># of Seq Scans</th>
+        <th>Rows Read by Seq Scans</th>
+        <th># of Index Scans</th>
+        <th>Rows Fetched by Index Scans</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for table in tables %}
+        <tr>
+          <td>{{ table.schemaname }}.{{ table.relname }}</td>
+          <td>{{ percent(table.idx_tup_fetch, (table.idx_tup_fetch + table.seq_tup_read)) }}</td>
+          <td>{{ table.seq_scan }}</td>
+          <td>{{ table.seq_tup_read }}</td>
+          <td>{{ table.idx_scan }}</td>
+          <td>{{ table.idx_tup_fetch }}</td>
+        </tr>
+      {% end %}
+    </tbody>
+  </table>
+
+{% end %}
