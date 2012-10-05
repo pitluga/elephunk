@@ -13,6 +13,7 @@
   <div class="tabbable tabs-left">
     <ul class="nav nav-tabs">
       <li class="active"><a href="#tables" data-toggle="tab">Tables</a></li>
+      <li><a href="#toast" data-toggle="tab">TOAST</a></li>
       <li><a href="#indexes" data-toggle="tab">Indexes</a></li>
       <li><a href="#sequences" data-toggle="tab">Sequences</a></li>
     </ul>
@@ -22,24 +23,52 @@
           <thead>
             <tr>
               <th>Table</th>
-              <th>Heap Blocks</th>
-              <th>Index Blocks</th>
-              <th>TOAST Blocks</th>
-              <th>TOAST Index Blocks</th>
+              <th>Heap Cache Ratio</th>
+              <th>Heap Cache Reads</th>
+              <th>Heap Disk Reads</th>
+              <th>Index Cache Ratio</th>
+              <th>Index Cache Reads</th>
+              <th>Index Disk Reads</th>
             </tr>
           </thead>
           <tbody>
             {% for table in tables %}
               <tr>
                 <td>{{ table.schemaname }}.{{ table.relname }}</td>
-                <td>{{ percent(table.heap_blks_hit, table.heap_blks_accessed) }}<br/>
-                  <small> {{ table.heap_blks_hit }} / {{ table.heap_blks_read }} </small></td>
-                <td>{{ percent(table.idx_blks_hit, table.idx_blks_accessed) }}<br/>
-                  <small> {{ table.idx_blks_hit }} / {{ table.idx_blks_read }} </small></td>
-                <td>{{ percent(table.toast_blks_hit, table.toast_blks_accessed) }}<br/>
-                  <small> {{ table.toast_blks_hit }} / {{ table.toast_blks_read }} </small></td>
-                <td>{{ percent(table.tidx_blks_hit, table.tidx_blks_accessed) }}<br/>
-                  <small> {{ table.tidx_blks_hit }} / {{ table.tidx_blks_read }} </small></td>
+                <td>{{ percent(table.heap_blks_hit, table.heap_blks_accessed) }}</td>
+                <td>{{ table.heap_blks_hit }}</td>
+                <td>{{ table.heap_blks_read }}</td>
+                <td>{{ percent(table.idx_blks_hit, table.idx_blks_accessed) }}</td>
+                <td> {{ table.idx_blks_hit }}</td>
+                <td>{{ table.idx_blks_read }}</td>
+              </tr>
+            {% end %}
+          </tbody>
+        </table>
+      </div>
+      <div class="tab-pane" id="toast">
+        <table class="table table-sorted">
+          <thead>
+            <tr>
+              <th>Table</th>
+              <th>Heap Cache Ratio</th>
+              <th>Heap Cache Reads</th>
+              <th>Heap Disk Reads</th>
+              <th>Index Cache Ratio</th>
+              <th>Index Cache Reads</th>
+              <th>Index Disk Reads</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for table in tables %}
+              <tr>
+                <td>{{ table.schemaname }}.{{ table.relname }}</td>
+                <td>{{ percent(table.toast_blks_hit, table.toast_blks_accessed) }}</td>
+                <td>{{ table.toast_blks_hit }}</td>
+                <td>{{ table.toast_blks_read }}</td>
+                <td>{{ percent(table.tidx_blks_hit, table.tidx_blks_accessed) }}</td>
+                <td> {{ table.tidx_blks_hit }}</td>
+                <td>{{ table.tidx_blks_read }}</td>
               </tr>
             {% end %}
           </tbody>
@@ -51,7 +80,9 @@
             <tr>
               <th>Table</th>
               <th>Name</th>
-              <th>Blocks</th>
+              <th>Cache Ratio</th>
+              <th>Cache Reads</th>
+              <th>Disk Reads</th>
             </tr>
           </thead>
           <tbody>
@@ -59,8 +90,9 @@
               <tr>
                 <td>{{ index.schemaname }}.{{ index.relname }}</td>
                 <td>{{ index.indexrelname }}</td>
-                <td>{{ percent(index.idx_blks_hit, index.idx_blks_accessed) }}<br/>
-                  <small> {{ index.idx_blks_hit }} / {{ index.idx_blks_read }} </small></td>
+                <td>{{ percent(index.idx_blks_hit, index.idx_blks_accessed) }}</td>
+                <td>{{ index.idx_blks_hit }}</td>
+                <td>{{ index.idx_blks_read }}</td>
               </tr>
             {% end %}
           </tbody>
@@ -71,15 +103,18 @@
           <thead>
             <tr>
               <th>Name</th>
-              <th>Blocks</th>
+              <th>Cache Ratio</th>
+              <th>Cache Reads</th>
+              <th>Disk Reads</th>
             </tr>
           </thead>
           <tbody>
             {% for sequence in sequences %}
               <tr>
                 <td>{{ sequence.relname }}</td>
-                <td>{{ percent(sequence.blks_hit, sequence.blks_accessed) }}<br/>
-                  <small> {{ sequence.blks_hit }} / {{ sequence.blks_read }} </small></td>
+                <td>{{ percent(sequence.blks_hit, sequence.blks_accessed) }}</td>
+                <td>{{ sequence.blks_hit }}</td>
+                <td>{{ sequence.blks_read }}</td>
               </tr>
             {% end %}
           </tbody>
