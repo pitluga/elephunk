@@ -1,0 +1,35 @@
+{% extends "../layouts/main.html" %}
+
+{% block nav %}
+  {% set active_tab = 'buffer-cache' %}
+{% end %}
+
+{% block content %}
+  <ul class="breadcrumb">
+    <li class="active">Server</li>
+  </ul>
+
+  <table class="table table-sorted">
+    <thead>
+      <tr>
+        <th>Database</th>
+        <th>Cache Hit Ratio</th>
+        <th>Disk Reads</th>
+        <th>Cache Reads</th>
+        <th>Stats Age</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for database in databases %}
+        <tr>
+          <td><a href="/buffer-cache/{{ database.datid }}">{{ database.datname }}</a></td>
+          <td>{{ percent(database.blks_hit, (database.blks_read + database.blks_hit)) }}</td>
+          <td>{{ database.blks_hit }}</td>
+          <td>{{ database.blks_read }}</td>
+          <td><abbr title="{{ database.stats_reset.isoformat() }}" class="easydate"></abbr></td>
+        </tr>
+      {% end %}
+    </tbody>
+  </table>
+{% end %}
+

@@ -1,12 +1,12 @@
 {% extends "../layouts/main.html" %}
 
 {% block nav %}
-  {% set active_tab = 'stats' %}
+  {% set active_tab = 'buffer-cache' %}
 {% end %}
 
 {% block content %}
   <ul class="breadcrumb">
-    <li><a href="/stats">Server</a><span class="divider">/</span></li>
+    <li><a href="/buffer-cache">Server</a><span class="divider">/</span></li>
     <li class="active">{{ database_name }}</li>
   </ul>
 
