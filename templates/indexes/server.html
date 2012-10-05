@@ -1,0 +1,34 @@
+{% extends "../layouts/main.html" %}
+
+{% block nav %}
+  {% set active_tab = 'indexes' %}
+{% end %}
+
+{% block content %}
+  <ul class="breadcrumb">
+    <li class="active">Server</li>
+  </ul>
+
+  <table class="table table-sorted">
+    <thead>
+      <tr>
+        <th>Database</th>
+        <th>Index Hit Ratio</th>
+        <th>Sequential Reads</th>
+        <th>Index Reads</th>
+        <th>Stats Age</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for database in databases %}
+        <tr>
+          <td>{{ database.datname }}</td>
+          <td>{{ percent(database.tup_fetched, (database.tup_fetched + database.tup_returned)) }}</td>
+          <td>{{ database.tup_returned }}</td>
+          <td>{{ database.tup_fetched }}</td>
+          <td><abbr title="{{ database.stats_reset.isoformat() }}" class="easydate"></abbr></td>
+        </tr>
+      {% end %}
+    </tbody>
+  </table>
+{% end %}
