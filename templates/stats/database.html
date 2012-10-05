@@ -46,9 +46,44 @@
         </table>
       </div>
       <div class="tab-pane" id="indexes">
-
+        <table class="table table-sorted">
+          <thead>
+            <tr>
+              <th>Table</th>
+              <th>Name</th>
+              <th>Blocks</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for index in indexes %}
+              <tr>
+                <td>{{ index.schemaname }}.{{ index.relname }}</td>
+                <td>{{ index.indexrelname }}</td>
+                <td>{{ percent(index.idx_blks_hit, index.idx_blks_accessed) }}<br/>
+                  <small> {{ index.idx_blks_hit }} / {{ index.idx_blks_read }} </small></td>
+              </tr>
+            {% end %}
+          </tbody>
+        </table>
       </div>
       <div class="tab-pane" id="sequences">
+        <table class="table table-sorted">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Blocks</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for sequence in sequences %}
+              <tr>
+                <td>{{ sequence.relname }}</td>
+                <td>{{ percent(sequence.blks_hit, sequence.blks_accessed) }}<br/>
+                  <small> {{ sequence.blks_hit }} / {{ sequence.blks_read }} </small></td>
+              </tr>
+            {% end %}
+          </tbody>
+        </table>
 
       </div>
     </div>
