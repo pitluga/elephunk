@@ -12,9 +12,17 @@ class Database():
     def select_all(self, operation, parameters=(), record=Row, callback=None):
         self.client.execute(operation, parameters, callback = lambda cursor: callback(self._map_cursor(cursor, record)))
 
+    def select_scalar(self, operation, parameters=(), callback=None):
+        self.client.execute(operation, parameters, callback = lambda cursor: callback(self._single_entry(cursor)))
+
     def _map_cursor(self, cursor, record):
         names = [x[0] for x in cursor.description]
         return [record(**dict(zip(names, row))) for row in cursor.fetchall()]
+
+    def _single_entry(self, cursor):
+        if cursor.rowcount == 0:
+            return None
+        return cursor.fetchall()[0][0]
 
 class DatabaseClients:
     def __init__(self, servers, client_factory=AsyncClient):

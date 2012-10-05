@@ -5,6 +5,10 @@
 {% end %}
 
 {% block content %}
+  <ul class="breadcrumb">
+    <li class="active">Server</li>
+  </ul>
+
   <table class="table table-sorted">
     <thead>
       <tr>
@@ -22,7 +26,7 @@
     <tbody>
       {% for database in databases %}
         <tr>
-          <td>{{ database.datname }}</td>
+          <td><a href="/stats/{{ database.datid }}">{{ database.datname }}</a></td>
           <td>{{ database.numbackends }}</td>
           <td>{{ database.xact_commit }} <small>comitted</small><br/>
             {{ database.xact_rollback }} <small>rolled back</small></td>

@@ -1,0 +1,59 @@
+{% extends "../layouts/main.html" %}
+
+{% block nav %}
+  {% set active_tab = 'stats' %}
+{% end %}
+
+{% block content %}
+  <ul class="breadcrumb">
+    <li><a href="/stats">Server</a><span class="divider">/</span></li>
+    <li class="active">{{ database_name }}</li>
+  </ul>
+
+  <div class="tabbable tabs-left">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#tables" data-toggle="tab">Tables</a></li>
+      <li><a href="#indexes" data-toggle="tab">Indexes</a></li>
+      <li><a href="#sequences" data-toggle="tab">Sequences</a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="tables">
+        <table class="table table-sorted">
+          <thead>
+            <tr>
+              <th>Table</th>
+              <th>Heap Blocks</th>
+              <th>Index Blocks</th>
+              <th>TOAST Blocks</th>
+              <th>TOAST Index Blocks</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for table in tables %}
+              <tr>
+                <td>{{ table.schemaname }}.{{ table.relname }}</td>
+                <td>{{ percent(table.heap_blks_hit, table.heap_blks_accessed) }}<br/>
+                  <small> {{ table.heap_blks_hit }} / {{ table.heap_blks_read }} </small></td>
+                <td>{{ percent(table.idx_blks_hit, table.idx_blks_accessed) }}<br/>
+                  <small> {{ table.idx_blks_hit }} / {{ table.idx_blks_read }} </small></td>
+                <td>{{ percent(table.toast_blks_hit, table.toast_blks_accessed) }}<br/>
+                  <small> {{ table.toast_blks_hit }} / {{ table.toast_blks_read }} </small></td>
+                <td>{{ percent(table.tidx_blks_hit, table.tidx_blks_accessed) }}<br/>
+                  <small> {{ table.tidx_blks_hit }} / {{ table.tidx_blks_read }} </small></td>
+              </tr>
+            {% end %}
+          </tbody>
+        </table>
+      </div>
+      <div class="tab-pane" id="indexes">
+
+      </div>
+      <div class="tab-pane" id="sequences">
+
+      </div>
+    </div>
+  </div>
+
+
+
+{% end %}
