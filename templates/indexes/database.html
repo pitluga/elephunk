@@ -10,29 +10,14 @@
     <li class="active">{{ database_name }}</li>
   </ul>
 
-  <table class="table table-sorted">
-    <thead>
-      <tr>
-        <th>Table</th>
-        <th>Index Hit Ratio</th>
-        <th># of Seq Scans</th>
-        <th>Rows Read by Seq Scans</th>
-        <th># of Index Scans</th>
-        <th>Rows Fetched by Index Scans</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for table in tables %}
-        <tr>
-          <td><a href="/indexes/{{ datid }}/{{ table.relid }}">{{ table.schemaname }}.{{ table.relname }}</a></td>
-          <td>{{ percent(table.idx_tup_fetch, (table.idx_tup_fetch + table.seq_tup_read)) }}</td>
-          <td>{{ table.seq_scan }}</td>
-          <td>{{ table.seq_tup_read }}</td>
-          <td>{{ table.idx_scan }}</td>
-          <td>{{ table.idx_tup_fetch }}</td>
-        </tr>
-      {% end %}
-    </tbody>
-  </table>
+  <div id="treemap"></div>
+{% end %}
 
+{% block javascripts %}
+  <script type="text/javascript">
+    var indexData = {% raw index_data %};
+  </script>
+
+  <script src="/static/js/v/d3.v2.min.js"></script>
+  <script src="/static/js/indexes.js"></script>
 {% end %}
