@@ -19,7 +19,7 @@
     <tbody>
       {% for database in databases %}
         <tr>
-          <td><a href="/indexes/{{ database.datid }}">{{ database.datname }}</a></td>
+          <td><a href="/bloat/{{ database.datid }}">{{ database.datname }}</a></td>
           <td>{{ database.size }}</td>
         </tr>
       {% end %}

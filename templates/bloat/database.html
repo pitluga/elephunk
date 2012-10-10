@@ -1,0 +1,19 @@
+{% extends "../layouts/main.html" %}
+
+{% block nav %}
+  {% set active_tab = 'bloat' %}
+{% end %}
+
+{% block content %}
+
+<div id="treemap"></div>
+{% end %}
+
+{% block javascripts %}
+  <script type="text/javascript">
+    var bloatData = {% raw bloat_data %};
+  </script>
+
+  <script src="/static/js/v/d3.v2.min.js"></script>
+  <script src="/static/js/bloat.js"></script>
+{% end %}
