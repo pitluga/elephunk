@@ -1,4 +1,5 @@
 from activity_handler import ActivityHandler
+from bloat_server_handler import BloatServerHandler
 from buffer_cache_database_handler import BufferCacheDatabaseHandler
 from buffer_cache_server_handler import BufferCacheServerHandler
 from indexes_server_handler import IndexesServerHandler
@@ -12,6 +13,7 @@ def handlers():
     return [(r"/", RootHandler),
             (r"/select-server", SelectServerHandler),
             (r"/activity", ActivityHandler),
+            (r"/bloat", BloatServerHandler),
             (r"/buffer-cache", BufferCacheServerHandler),
             (r"/buffer-cache/([0-9]+)", BufferCacheDatabaseHandler),
             (r"/indexes", IndexesServerHandler),

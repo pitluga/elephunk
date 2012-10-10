@@ -1,0 +1,29 @@
+{% extends "../layouts/main.html" %}
+
+{% block nav %}
+  {% set active_tab = 'bloat' %}
+{% end %}
+
+{% block content %}
+  <ul class="breadcrumb">
+    <li class="active">Server</li>
+  </ul>
+
+  <table class="table table-sorted">
+    <thead>
+      <tr>
+        <th>Database</th>
+        <th>Size</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for database in databases %}
+        <tr>
+          <td><a href="/indexes/{{ database.datid }}">{{ database.datname }}</a></td>
+          <td>{{ database.size }}</td>
+        </tr>
+      {% end %}
+    </tbody>
+  </table>
+{% end %}
+
