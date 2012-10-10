@@ -5,8 +5,12 @@
 {% end %}
 
 {% block content %}
+  <ul class="breadcrumb">
+    <li><a href="/bloat">Server</a><span class="divider">/</span></li>
+    <li class="active">{{ database_name }}</li>
+  </ul>
 
-<div id="treemap"></div>
+  <div id="treemap"></div>
 {% end %}
 
 {% block javascripts %}
