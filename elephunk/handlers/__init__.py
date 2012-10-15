@@ -8,7 +8,6 @@ from indexes_database_handler import IndexesDatabaseHandler
 from indexes_table_handler import IndexesTableHandler
 from root_handler import RootHandler
 from select_server_handler import SelectServerHandler
-from server_stats_handler import ServerStatsHandler
 
 def handlers():
     return [(r"/", RootHandler),

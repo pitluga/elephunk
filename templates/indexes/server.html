@@ -26,7 +26,7 @@
           <td>{{ percent(database.tup_fetched, (database.tup_fetched + database.tup_returned)) }}</td>
           <td>{{ database.tup_returned }}</td>
           <td>{{ database.tup_fetched }}</td>
-          <td><abbr title="{{ database.stats_reset.isoformat() }}" class="easydate"></abbr></td>
+          <td><abbr title="{{ database.stats_reset_iso }}" class="easydate"></abbr></td>
         </tr>
       {% end %}
     </tbody>
